@@ -76,4 +76,5 @@ jobs:
         run: docker build -t smart-canteen-frontend:ci ./frontend
 
       - name: Verify Docker images
-        run: docker image ls smart-canteen-backend:ci smart-canteen-frontend:ci
+        run: docker image inspect smart-canteen-backend:ci && docker image inspect smart-canteen-frontend:ci
+
