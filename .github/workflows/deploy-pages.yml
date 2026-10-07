@@ -40,6 +40,8 @@ jobs:
       - name: Build React application
         working-directory: frontend
         run: npm run build
+         env:
+              VITE_BASE: /smart-canteen-fsjp/
 
       - name: Setup GitHub Pages
         uses: actions/configure-pages@v5
