@@ -1,4 +1,4 @@
-﻿import axios from 'axios';
+import axios from 'axios';
 
 export const API_BASE_URL =
   import.meta.env.VITE_API_BASE_URL || '/api';
@@ -16,6 +16,8 @@ api.interceptors.request.use((config) => {
 
 export const login = (data) => api.post('/auth/login', data);
 export const register = (data) => api.post('/auth/register', data);
+export const setupCanteen = (data) => api.post('/auth/setup-canteen', data);
+
 export const getMenu = () => api.get('/menu');
 export const createMenuItem = (data) => api.post('/menu', data);
 export const updateMenuItem = (id, data) => api.put(`/menu/${id}`, data);
@@ -26,14 +28,14 @@ export const placeOrder = (data) => api.post('/student/orders', data);
 export const submitFeedback = (data) => api.post('/student/feedback', data);
 
 export const getStaffOrders = () => api.get('/staff/orders');
-export const acceptOrder = (id, estimatedMinutes) =>
-  api.put(`/staff/orders/${id}/accept`, { estimatedMinutes });
+export const acceptOrder = (id, estimatedMinutes) => api.put(`/staff/orders/${id}/accept`, { estimatedMinutes });
 export const rejectOrder = (id) => api.put(`/staff/orders/${id}/reject`);
 export const markReady = (id) => api.put(`/staff/orders/${id}/ready`);
 export const markCollected = (id) => api.put(`/staff/orders/${id}/collect`);
 
 export const getAdminDashboard = () => api.get('/admin/dashboard');
 export const getUsers = () => api.get('/admin/users');
+export const createStaff = (data) => api.post('/admin/staff', data);
 export const blockUser = (id) => api.put(`/admin/users/${id}/block`);
 export const unblockUser = (id) => api.put(`/admin/users/${id}/unblock`);
 export const getFeedback = () => api.get('/admin/feedback');

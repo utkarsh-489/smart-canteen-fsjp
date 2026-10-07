@@ -120,9 +120,26 @@ public class OrderService {
         return orders.save(o);
     }
 
-    private String nextToken() {
-        LocalDateTime start = LocalDate.now().atStartOfDay();
-        long count = orders.countByCreatedAtBetween(start, start.plusDays(1));
-        return "C" + (19 + count + 1);
+    private synchronized String nextToken() {
+        LocalDate today = LocalDate.now();
+        int maxToken = 0;
+
+        for (CustomerOrder existing : orders.findAllByOrderByCreatedAtDesc()) {
+            if (existing.getCreatedAt() != null &&
+                existing.getCreatedAt().toLocalDate().equals(today) &&
+                existing.getTokenNumber() != null &&
+                existing.getTokenNumber().matches("C\\d+")) {
+
+                try {
+                    int value = Integer.parseInt(existing.getTokenNumber().substring(1));
+                    maxToken = Math.max(maxToken, value);
+                } catch (NumberFormatException ignored) {
+                    // Ignore malformed legacy token values.
+                }
+            }
+        }
+
+        return "C" + (maxToken + 1);
     }
 }
+

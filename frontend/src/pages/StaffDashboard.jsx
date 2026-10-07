@@ -212,7 +212,7 @@ export default function StaffDashboard() {
           <h4 className="fw-bold mb-1">Staff Dashboard</h4>
           <small className="text-muted">Manage the live order queue and today's offers.</small>
         </div>
-        <button className="btn btn-outline-secondary btn-sm" onClick={() => load().catch(() => {})}>??? Refresh</button>
+        <button className="btn btn-outline-secondary btn-sm" onClick={() => load().catch(() => {})}>Refresh</button>
       </div>
 
       <div className="row g-3 mb-4">
